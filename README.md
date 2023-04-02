@@ -35,7 +35,7 @@ Python 3.x packages `math`, `numpy`, `scipy.sparse`, and `fht` (https://github.c
 
 - **Python command line**
 ```python
-git clone https://github.dell.com/dell/jlt.git
+git clone https://github.com/dell/jlt.git
 ```
 
 or
@@ -47,7 +47,7 @@ import os, sys
 path = os.getcwd()
 os.chdir(path)
 
-!git clone https://github.dell.com/dell/jlt.git
+!git clone https://github.com/dell/jlt.git
 
 sys.path.insert(0, path+'\jlt')
 ```
