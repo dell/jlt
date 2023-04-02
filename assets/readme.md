@@ -1,3 +1,0 @@
-# jlt
-
-assets
