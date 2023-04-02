@@ -3,7 +3,7 @@
 Johnson-Lindenstrauss transforms, random projections, and randomized Hadamard transforms in python 3.x
 
 Created by:
-Ben Fauber, Dell Technologies, 02Apr2023
+[Ben Fauber](https://github.com/benfauber), Dell Technologies, 02Apr2023
 
 ***
 
@@ -11,14 +11,14 @@ Ben Fauber, Dell Technologies, 02Apr2023
 
 Provides python 3.x functions based on the Johnson-Lindenstrauss (JL) lemma. The Johnson-Lindenstrauss Transform (JLT) preserves pair-wise distances with bounded error `eps` as points are projected from high-dimensional space `d` into a lower-dimensional space `k`. The functions in this package accepts `d`-dimensional vector and matrix/array inputs to return the `k`-dimensional output. The JLT preserves the square of the L2-norm between points with bounded error `eps`.
 
-<IMG SRC="/assets/jl_lemma.PNG" HEIGHT="50%" WIDTH="50%" CLASS="center" ALT="johnson-lindenstrauss lemma">
+<IMG SRC="/assets/jl_lemma.PNG" HEIGHT="70%" WIDTH="70%" CLASS="center" ALT="johnson-lindenstrauss lemma">
 <P>
 
-The figures below illustrate the JLT runtimes and preservation of the square of the L2-norm by the FJLT. Random projections (RP) and Fast Johnson-Lindenstrauss Transform (FJLT) are faster versions of the original JLT, and subsampled randomized Hadamard transforms (SRHT) are even faster yet (left figure). The FJLT preserves the square of the L2-norm regardless of the sparsity of the input (right figure). In both of the figures, `d` is held constant at `d = 16,384` and `k` is varied (x-axis).
+The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of the square of the L2-norm by the Fast JLT (FJLT). Random projections (RP) and Fast Johnson-Lindenstrauss Transform (FJLT) are faster versions of the original JLT, and subsampled randomized Hadamard transforms (SRHT) are even faster yet (first figure, gold line). The FJLT preserves the square of the L2-norm regardless of the sparsity of the input (second figure). In both of the figures, `d` is held constant at `d = 16,384` and `k` is varied (x-axis).
 
-<IMG SRC="/assets/jlt_runtimes.png" HEIGHT="30%" WIDTH="30%" CLASS="center" ALT="johnson-lindenstrauss runtimes">
+<IMG SRC="/assets/jlt_runtimes.png" HEIGHT="30%" WIDTH="30%" CLASS="center" ALT="johnson-lindenstrauss algorithm runtimes">
 
-<IMG SRC="/assets/fjlt_l2normpreservation.png" HEIGHT="30%" WIDTH="30%" CLASS="center" ALT="johnson-lindenstrauss preservation of L2-norm">
+<IMG SRC="/assets/fjlt_l2normpreservation.png" HEIGHT="30%" WIDTH="30%" CLASS="center" ALT="fast johnson-lindenstrauss transform (FJLT) preservation of L2-norm">
 <P>
 
 JLT has applications in [linear mappings](https://en.wikipedia.org/wiki/Linear_map), [random projections](https://en.wikipedia.org/wiki/Random_projection), [locality-sensitive hashing LSH](https://en.wikipedia.org/wiki/Locality-sensitive_hashing), [matrix sketching](https://arxiv.org/abs/1206.0594), and [sparse recovery](https://www.cs.utexas.edu/~ecprice/courses/sublinear/bwca-sparse-recovery.pdf).
