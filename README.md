@@ -2,6 +2,8 @@
 
 Johnson-Lindenstrauss transforms, random projections, and randomized Hadamard transforms in python 3.x
 
+Supports linear mappings and radial basis function (rbf) mappings (a.k.a. Random Fourier Features) that reduce dimensionality while preserving the square of the L2-norm between points with bounded error.
+
 Created by:
 [Ben Fauber](https://github.com/benfauber), Dell Technologies, 02Apr2023
 
