@@ -18,8 +18,8 @@ setup(
     url="https://github.com/dell/jlt",
     packages=['jlt'],
     classifiers=[
-        "Programming Language :: Python :: 3",
-        "License :: MIT License",
+        "Programming Language :: Python :: 3.x",
+        "License :: Apache 2.0",
         "Operating System :: OS Independent",
     ],
     install_requires=[
