@@ -1,18 +1,43 @@
 #!/usr/bin/python
 # -*- coding: UTF-8 -*-
 
+'''linearMapping.py'''
+
 '''
-2022-06-27
+MIT License
+
+Copyright (c) 2023 Dell Technologies, Inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+'''
+
+'''
+2023-04-02
 Ben Fauber
-ben.fauber@dell.com
 Dell Technologies
 Austin, Texas, USA
 '''
 
+import math
 import numpy as np
 import scipy.sparse as sp
 import fht      #Fast hadamard transform from https://github.com/nbarbey/fht
-import math
 
 
 def approximate_k_jlt(m, eps):
@@ -469,113 +494,6 @@ def linearMapping(A, k=None, eps=0.1, method='FJLT', p=2, random_seed=21):
             
     return matrix_out
 
-
-def normalize_vec(v):
-    '''
-    Returns normalized vector using L2-norm
-    '''
-    norm = np.linalg.norm(v)
-    if norm == 0: 
-       return v
-    return v / norm
-
-
-
-########################################################################
-# Inverse SRHT FUNCTIONS TO ENABLE L1-MAGIC
-########################################################################
-
-
-def random_selector_trans(Aprime, k, m, d, random_seed, swr):
-    '''
-    Helper function to generate a sparse vector/matrix to enable inverse process of SRHT.
-    Enables `inverse_SRHT()` function.
-    
-    Parameters
-    ----------
-    Aprime : vector or array of k x m dimensions
-        input of JLT on A (follows FJLT matrix naming paradigm)
-    k : int > 0
-        input matrix size
-    m : int > 0  (NOTE: currently set to m == 1, see code below)
-        input matrix size
-    d : int > 0
-        output matrix size
-    random_seed : int
-        random seed value for the random normal distrubtion sampling.
-    swr : Boolean
-        sample without replacement if FALSE
-        sample with replacement if TRUE
-    
-    Returns
-    -------
-    matrix : d x m dimension matrix in csr sparse format
-    '''
-    rng = np.random.default_rng(seed=random_seed+23)
-    rows = np.zeros((k))
-    cols = rng.choice(d, size=k, replace=swr)
-    mat_out = sp.csr_matrix((Aprime, (cols, rows)), shape=(d, m))
-    return mat_out
-
-
-def inverse_SRHT(Aprime, d, random_seed, swr=False):
-    '''
-    Inverse of SRHT (JLT). Transforms vector or array of 
-    k x m dimensions into d x m dimensions, where d > k
-
-    Inverse of:
-    F. Krahmer and R. Ward, `New and improved Johnson-Lindenstrauss 
-    embeddings via the Restricted Isometry Property.`
-    SIAM J. Math. Anal. 2011, 43(3), 1269–1281. 
-   
-    Parameters
-    ----------
-    Aprime : row vector or column vector,
-        Input row vector or column vector of k x m dimensions.
-    d : int
-        Size of up-sampled dimension output required (k-to-d dimensions, d > k).
-    random_seed : int
-        Random seed value for the random number generator.
-    swr : Boolean
-        sample without replacement if FALSE
-        sample with replacement if TRUE
-        
-    Returns
-    -------
-    Phi : column vector or array,
-        Output column vector or array of d x m dimensions.
-    '''
-    # check if input is row vector (1-d) or column vector (2-d)
-    if Aprime.ndim == 1:
-        # row vector 
-        k = Aprime.shape[0]
-        m = 1
-        Aprime = np.squeeze(Aprime)
-    elif Aprime.ndim == 2:
-        # column vector
-        k, m = Aprime.shape
-        Aprime = np.squeeze(Aprime)
-    d = int(d)
-    random_seed = int(random_seed)
-    swr = False
-    
-    Pt = random_selector_trans(Aprime, k, m, d, random_seed, swr)
-    HtPt = calculate_H(Pt.todense(), d, m, d_act)
-    D = calculate_D_SRHT(d, k, random_seed)
-    return D@HtPt
-
-
-########################################################################
-
-
-def normalize_vec(v):
-    '''
-    Returns normalized vector using L2-norm
-    '''
-    norm = np.linalg.norm(v)
-    if norm == 0: 
-       return v
-    return v / norm
 
 
 ########################################################################
