@@ -16,7 +16,7 @@ Provides python 3.x functions based on the Johnson-Lindenstrauss (JL) lemma. The
 At a high level, the Johnson-Lindenstrauss transform (JLT) is a dimensionality-reduction technique as illustrated below, where $n > 0$ and typically $d >> k$.
 
 <P align="center">
-<IMG SRC="/assets/overview.PNG" HEIGHT="40%" WIDTH="40%" CLASS="center" ALT="illustration of johnson-lindenstrauss lemma in practice">
+<IMG SRC="/assets/overview.PNG" HEIGHT="50%" WIDTH="50%" CLASS="center" ALT="illustration of johnson-lindenstrauss lemma in practice">
   </P>
   <P>
 
