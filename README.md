@@ -24,7 +24,7 @@ Specifically, a Johnson-Lindenstrauss transform (JLT) $\Phi$ is a random linear 
 
 The above equation can be further simplified where $B$ is replaced with the linear map $\Phi$ and $x = u - v$ such that $\|\|\Phi x\|\|^2_{\ell_2} = (1 \pm \epsilon)\|\|x\|\|^2_{\ell_2} \quad \forall x \in Z$.
     
-The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of the square of the $\ell_2$-norm by the Fast JLT (FJLT). Random projections (RP) and Fast Johnson-Lindenstrauss Transform (FJLT) are faster versions of the original JLT, and subsampled randomized Hadamard transforms (SRHT) are even faster yet (first figure, gold line). The FJLT preserves the square of the $\ell_2$-norm regardless of the sparsity of the input (second figure). In both of the figures, $d$ is held constant at $d = 16,384$ and $k$ is varied (x-axis).
+The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of the square of the $\ell_2$-norm by the Fast JLT (FJLT). Random projections (RP) and Fast Johnson-Lindenstrauss Transform (FJLT) are faster versions of the original JLT, and subsampled randomized Hadamard transforms (SRHT) are even faster yet (first figure, gold line). The FJLT preserves the square of the $\ell_2$-norm regardless of the sparsity of the input (second figure). In both of the figures, $d$ is held constant at $d$ = 16,384 and $k$ is varied (x-axis).
 
 <P align="center">
 <IMG SRC="/assets/jlt_runtimes.png" HEIGHT="40%" WIDTH="40%" CLASS="center" ALT="johnson-lindenstrauss algorithm runtimes">
