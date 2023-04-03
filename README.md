@@ -111,7 +111,7 @@ Produces radial basis function (RBF) mapping (a.k.a. Random Fourier Features) of
 
 Defaults are: `k=None`, `method=SRHT-RFF`, `gamma=1.0`, and `random_seed=21`. Code is fully commented -- variables and helper functions are further defined within the PY file. 
 
-The user can further edit the code to specify sampling with replacement (swr) or sampling without replacement (swor) for either faster or more accurate calculations, respectively. NOTE: swor is recommended when solving for inverse matrices with iterative solvers (e.g., compressed sensing).
+The user can further edit the code to specify sampling with replacement `swr` or sampling without replacement `swor` for either faster or more accurate calculations, respectively. NOTE: `swor` is recommended when solving for inverse matrices with iterative solvers (e.g., compressed sensing applications).
   
 ***
 
