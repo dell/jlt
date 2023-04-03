@@ -2,7 +2,7 @@
 
 Johnson-Lindenstrauss transforms, random projections, and randomized Hadamard transforms in python 3.x
 
-Supports linear mappings and radial basis function (rbf) mappings (a.k.a. Random Fourier Features) that reduce dimensionality while preserving the square of the $\ell2-norm$ between points with bounded error.
+Supports linear mappings and radial basis function (rbf) mappings (a.k.a. Random Fourier Features) that reduce dimensionality while preserving the square of the $\ell_2$-norm between points with bounded error.
 
 Created by:
 [Ben Fauber](https://github.com/benfauber), Dell Technologies, 02Apr2023
@@ -11,14 +11,14 @@ Created by:
 
 ## Overview
 
-Provides python 3.x functions based on the Johnson-Lindenstrauss (JL) lemma. The Johnson-Lindenstrauss Transform (JLT) preserves pair-wise distances with bounded error $\epsilon$ as points are projected from high-dimensional space $d$ into a lower-dimensional space $k$. The functions in this package accepts $d$-dimensional vector and matrix/array inputs to return the $k$-dimensional output. The JLT preserves the square of the $\ell2-norm$ between points with bounded error $\epsilon$.
+Provides python 3.x functions based on the Johnson-Lindenstrauss (JL) lemma. The Johnson-Lindenstrauss Transform (JLT) preserves pair-wise distances with bounded error $\epsilon$ as points are projected from high-dimensional space $d$ into a lower-dimensional space $k$. The functions in this package accept $d$-dimensional vector and/or matrix/array inputs to return the $k$-dimensional output. The JLT preserves the square of the $\ell_2$-norm between points with bounded error $\epsilon$.
 
 <P align="center">
 <IMG SRC="/assets/jl_lemma.PNG" HEIGHT="60%" WIDTH="60%" CLASS="center" ALT="johnson-lindenstrauss lemma">
   </P>
   <P>
 
-The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of the square of the $\ell2-norm$ by the Fast JLT (FJLT). Random projections (RP) and Fast Johnson-Lindenstrauss Transform (FJLT) are faster versions of the original JLT, and subsampled randomized Hadamard transforms (SRHT) are even faster yet (first figure, gold line). The FJLT preserves the square of the $\ell2-norm$ regardless of the sparsity of the input (second figure). In both of the figures, $d$ is held constant at $d = 16,384$ and $k$ is varied (x-axis).
+The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of the square of the $\ell_2$-norm by the Fast JLT (FJLT). Random projections (RP) and Fast Johnson-Lindenstrauss Transform (FJLT) are faster versions of the original JLT, and subsampled randomized Hadamard transforms (SRHT) are even faster yet (first figure, gold line). The FJLT preserves the square of the $\ell_2$-norm regardless of the sparsity of the input (second figure). In both of the figures, $d$ is held constant at $d = 16,384$ and $k$ is varied (x-axis).
 
 <IMG SRC="/assets/jlt_runtimes.png" HEIGHT="40%" WIDTH="40%" CLASS="center" ALT="johnson-lindenstrauss algorithm runtimes">
 <IMG SRC="/assets/fjlt_l2normpreservation.png" HEIGHT="40%" WIDTH="40%" CLASS="center" ALT="fast johnson-lindenstrauss transform (FJLT) preservation of L2-norm">
@@ -66,17 +66,17 @@ sys.path.insert(0, path+'\jlt')
 ## Functions
 
 ### linearMapping()
-Produces linear mapping of input vector or array from `d` dimensions into `k` dimensions, typically applied where $d >> k$. Provides bounded guarantees of Johnson-Lindenstrauss lemma when `k` is determined automatically (via method of Dasgupta et al.) with user-defined `eps` ($\epsilon$ in Johnson-Lindenstrauss lemma) as the error associated with the preservation of the $\ell2-norm$.
+Produces linear mapping of input vector or array from `d` dimensions into `k` dimensions, typically applied where $d >> k$. Provides bounded guarantees of Johnson-Lindenstrauss lemma when `k` is determined automatically (via method of Dasgupta et al.) with user-defined `eps` ($\epsilon$ in Johnson-Lindenstrauss lemma) as the error associated with the preservation of the $\ell_2$-norm.
 
-`A` is the input vector $A \in \mathbb{R}^{d}$ or matrix $A \in \mathbb{R}^{n \times d}$. `p` is the $l{p}-norm$ where $p \in \{ 1,2 \}$, and is only relevant to the `FJLT` method.
+Function accepts one of several methods: `JLT`, `SparseRP`, `VerySparseRP`, `FJLT`, or `SRHT`. See references section below for more details on each method.
+  
+`A` is the input vector $A \in \mathbb{R}^{d}$ or matrix $A \in \mathbb{R}^{n \times d}$. `p` is the $\ell{p}$-norm where $p \in \\\{ 1, 2 \\\}$ and is only relevant to the `FJLT` method.
 
-Function accepts one of several methods: `JLT`, `SparseRP`, `VerySparseRP`, `FJLT`, or `SRHT`.
-
-Defaults are: `k=None`, `eps=0.1`, `method=FJLT`, `p=2`, and `random_seed=21`. Code is fully commented -- variables and helper functions are further defined within the PY file.
+Defaults are: `k=None`, `eps=0.1`, `method=FJLT`, `p=2`, and `random_seed=21`. Code is fully commented -- variables and helper functions are further defined within the PY file. The user can further edit the code to specify sampling with replacement (swr) or sampling without replacement (swor) for either faster or more accurate calculations, respectively.
 
 ```python
 [in]> linearMapping(A, k=None, eps=0.1, method='FJLT', p=2, random_seed=21)
-[out]> # d-to-k mapping of A
+[out]> # d-to-k linear mapping of A
 ```
 
 ***
