@@ -32,7 +32,7 @@ The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of 
 </P>
 <P>
 
-JLT has applications in [linear mappings](https://en.wikipedia.org/wiki/Linear_map), [random projections](https://en.wikipedia.org/wiki/Random_projection), [locality-sensitive hashing LSH](https://en.wikipedia.org/wiki/Locality-sensitive_hashing), [matrix sketching](https://arxiv.org/abs/1206.0594), and [sparse recovery](https://www.cs.utexas.edu/~ecprice/courses/sublinear/bwca-sparse-recovery.pdf).
+JLT has applications in [linear mappings](https://en.wikipedia.org/wiki/Linear_map), [random projections](https://en.wikipedia.org/wiki/Random_projection), [locality-sensitive hashing LSH](https://en.wikipedia.org/wiki/Locality-sensitive_hashing), [matrix sketching](https://arxiv.org/abs/1206.0594), [low-rank matrix approximations](https://en.wikipedia.org/wiki/Low-rank_matrix_approximations), and [sparse recovery](https://www.cs.utexas.edu/~ecprice/courses/sublinear/bwca-sparse-recovery.pdf).
 
 ***
 
