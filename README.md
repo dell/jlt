@@ -109,7 +109,7 @@ The user can further edit the code to specify sampling with replacement (swr) or
 
 ### References
 
-`JLT` W. B. Johnson and J. Lindenstrauss, "Extensions of Lipschitz mappings into a Hilbert Space." Contemp. Math. 1984, 26, 189-206. 
+`JLT` W. B. Johnson and J. Lindenstrauss, "Extensions of Lipschitz mappings into a Hilbert Space." Contemp. Math. 1984, 26, 189-206. [link to paper](http://stanford.edu/class/cs114/readings/JL-Johnson.pdf)
 
 `SparseRP` Dimitris Achlioptas, "Database-friendly random projections: Johnson-Lindenstrauss with binary coins." J. Comput. Syst. Sci. 2003, 66(4), 671-687. [link to paper](https://www.sciencedirect.com/science/article/pii/S0022000003000254)
 
