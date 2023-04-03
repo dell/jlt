@@ -2,7 +2,7 @@
 
 Johnson-Lindenstrauss transforms, random projections, and randomized Hadamard transforms in python 3.x
 
-Supports linear mappings and radial basis function (rbf) mappings (a.k.a. Random Fourier Features) that reduce dimensionality while preserving the square of the $\ell_2$-norm between points with bounded error.
+Supports linear mappings and radial basis function (RBF) mappings (a.k.a. Random Fourier Features) that reduce dimensionality while preserving the square of the $\ell_2$-norm between points with bounded error.
 
 Created by:
 [Ben Fauber](https://github.com/benfauber), Dell Technologies, 02Apr2023
@@ -58,7 +58,7 @@ sys.path.insert(0, path+'\jlt')
 2) Import the module into your script:
 
 ```python
-[in]> from linearMapping import linearMapping
+[in]> from linearMapping import linearMapping, rbfMapping
 ```
 
 ***
@@ -66,35 +66,69 @@ sys.path.insert(0, path+'\jlt')
 ## Functions
 
 ### linearMapping()
-Produces linear mapping of input vector or array from `d` dimensions into `k` dimensions, typically applied where $d >> k$. Provides bounded guarantees of Johnson-Lindenstrauss lemma when `k` is determined automatically (via method of Dasgupta et al.) with user-defined `eps` ($\epsilon$ in Johnson-Lindenstrauss lemma) as the error associated with the preservation of the $\ell_2$-norm.
-
-Function accepts one of several methods: `JLT`, `SparseRP`, `VerySparseRP`, `FJLT`, or `SRHT`. See references section below for more details on each method.
-  
-`A` is the input vector $A \in \mathbb{R}^{d}$ or matrix $A \in \mathbb{R}^{n \times d}$. `p` is the $\ell{p}$-norm where $p \in \\\{ 1, 2 \\\}$ and is only relevant to the `FJLT` method.
-
-Defaults are: `k=None`, `eps=0.1`, `method=FJLT`, `p=2`, and `random_seed=21`. Code is fully commented -- variables and helper functions are further defined within the PY file. The user can further edit the code to specify sampling with replacement (swr) or sampling without replacement (swor) for either faster or more accurate calculations, respectively.
+Produces linear mapping of input vector or array from `d` dimensions into `k` dimensions, typically applied where $d >> k$. Provides bounded guarantees of Johnson-Lindenstrauss lemma when `k` is determined automatically (i.e., `k=None`), via the method of Dasgupta and Gupta, with user-defined `eps` ($\epsilon$ in Johnson-Lindenstrauss lemma) as the error associated with the preservation of the $\ell_2$-norm.
 
 ```python
 [in]> linearMapping(A, k=None, eps=0.1, method='FJLT', p=2, random_seed=21)
 [out]> # d-to-k linear mapping of A
-```
+```  
 
+`A` is the input vector $A \in \mathbb{R}^{d}$ or matrix $A \in \mathbb{R}^{n \times d}$. 
+
+`method` accepts one of several variants of the JLT: `JLT`, `SparseRP`, `VerySparseRP`, `FJLT`, or `SRHT`. See _References_ section below for more details on each method.
+  
+`p` is the $\ell{p}$-norm where $p \in \\\{ 1, 2 \\\}$ and is only relevant to the `FJLT` method.
+  
+`random_seed` is the random seed value for the generator function that randomizes the Gaussian and/or the row-selector function, based on the `method` employed.
+
+Defaults are: `k=None`, `eps=0.1`, `method=FJLT`, `p=2`, and `random_seed=21`. Code is fully commented -- variables and helper functions are further defined within the PY file. 
+  
+The user can further edit the code to specify sampling with replacement `swr` or sampling without replacement `swor` for either faster or more accurate calculations, respectively. NOTE: `swor` is recommended when solving for inverse matrices with iterative solvers (e.g., compressed sensing applications).
+
+### rbfMapping()
+Produces radial basis function (RBF) mapping (a.k.a. Random Fourier Features) of input vector or array from `d` dimensions into `k` dimensions, typically applied where $d >> k$. Provides bounded guarantees of Johnson-Lindenstrauss lemma when `k` is determined automatically (i.e., `k=None`), via the method of Dasgupta and Gupta, with user-defined `eps` ($\epsilon$ in Johnson-Lindenstrauss lemma) as the error associated with the preservation of the $\ell_2$-norm.
+
+```python
+[in]> rbfMapping(A, k=None, method='SRHT-RFF', gamma=1.0, random_seed=21)
+[out]> # d-to-k radial basis function mapping of A
+```
+ 
+`A` is the input vector $A \in \mathbb{R}^{d}$ or matrix $A \in \mathbb{R}^{n \times d}$. 
+
+`method` accepts two variants of the RBF: `RFF` or `SRHT-RFF`. See _References_ section below for more details on each method.
+  
+`gamma` is the standard deviation of the Gaussian distribution.
+  
+`random_seed` is the random seed value for the generator function that randomizes the Gaussian and/or the row-selector function, based on the `method` employed.
+
+Defaults are: `k=None`, `method=SRHT-RFF`, `gamma=1.0`, and `random_seed=21`. Code is fully commented -- variables and helper functions are further defined within the PY file. 
+
+The user can further edit the code to specify sampling with replacement (swr) or sampling without replacement (swor) for either faster or more accurate calculations, respectively. NOTE: swor is recommended when solving for inverse matrices with iterative solvers (e.g., compressed sensing).
+  
 ***
 
 ### References
 
-W. B. Johnson and J. Lindenstrauss, "Extensions of Lipschitz mappings into a Hilbert Space." Contemp. Math. 1984, 26, 189-206. 
+`JLT` W. B. Johnson and J. Lindenstrauss, "Extensions of Lipschitz mappings into a Hilbert Space." Contemp. Math. 1984, 26, 189-206. 
 
-Dimitris Achlioptas, "Database-friendly random projections: Johnson-Lindenstrauss with binary coins." J. Comput. Syst. Sci. 2003, 66(4), 671-687. [link to paper](https://www.sciencedirect.com/science/article/pii/S0022000003000254)
+`SparseRP` Dimitris Achlioptas, "Database-friendly random projections: Johnson-Lindenstrauss with binary coins." J. Comput. Syst. Sci. 2003, 66(4), 671-687. [link to paper](https://www.sciencedirect.com/science/article/pii/S0022000003000254)
 
-L. Peng, T. J. Hastie, K. W. Church, "Very sparse random projections." KDD 2006, Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining, August 2006, pages 287–296. [link to paper](https://dl.acm.org/doi/10.1145/1150402.1150436)
+`VerySparseRP` L. Peng, T. J. Hastie, K. W. Church, "Very sparse random projections." KDD 2006, Proceedings of the 12th ACM SIGKDD international conference on Knowledge discovery and data mining, August 2006, pages 287–296. [link to paper](https://dl.acm.org/doi/10.1145/1150402.1150436)
 
-N. Ailon and B. Chazelle, "Approximate Nearest Neighbors and the Fast Johnson-Lindenstrauss Transform." STOC’06, May21–23, 2006, Seattle, Washington, USA. [link to paper](http://www.cs.technion.ac.il/~nailon/fjlt.pdf)
+`FJLT` N. Ailon and B. Chazelle, "Approximate Nearest Neighbors and the Fast Johnson-Lindenstrauss Transform." STOC’06, May21–23, 2006, Seattle, Washington, USA. [link to paper](http://www.cs.technion.ac.il/~nailon/fjlt.pdf)
 
-F. Krahmer and R. Ward, "New and improved Johnson-Lindenstrauss embeddings via the restricted isometry property." SIAM J. Math. Anal. 2011, 43(3), 1269–1281. [link to paper](https://arxiv.org/abs/1009.0744)
+`SRHT` F. Krahmer and R. Ward, "New and improved Johnson-Lindenstrauss embeddings via the restricted isometry property." SIAM J. Math. Anal. 2011, 43(3), 1269–1281. [link to paper](https://arxiv.org/abs/1009.0744)
 
-N. Ailon and E. Liberty, "Almost Optimal Unrestricted Fast Johnson-Lindenstrauss Transform." ACM Trans. Algorithms 2013, 9(3), 1–12. [link to paper](https://arxiv.org/abs/1005.5513)
+`SRHT` N. Ailon and E. Liberty, "Almost Optimal Unrestricted Fast Johnson-Lindenstrauss Transform." ACM Trans. Algorithms 2013, 9(3), 1–12. [link to paper](https://arxiv.org/abs/1005.5513)
 
+`RFF` A. Rahimi and B. Recht. "Random Features for Large-Scale Kernel Machines." NeurIPS 2007. [link to paper](https://papers.nips.cc/paper_files/paper/2007/file/013a006f03dbc5392effeb8f18fda755-Paper.pdf)
+  
+`SRHT-RFF` Y. Cherapanamjeri and J. Nelson. "Uniform Approximations for Randomized Hadamard Transforms with Applications." 2022 Proceedings of the 54th Annual ACM SIGACT Symposium on Theory of Computing (STOC), 659–671. [link to paper](https://dl.acm.org/doi/abs/10.1145/3519935.3519961)
+  
+`k` S. Dasgupta and A. Gupta. "An elementary proof of the Johnson-Lindenstrauss Lemma." 1999. [link to paper](https://cseweb.ucsd.edu/~dasgupta/papers/jl.pdf)
+  
+Recent work on tight lower bounds for `k` K. G. Larsen and J. Nelson. "Optimality of the Johnson-Lindenstrauss Lemma." 2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS). [link to paper](https://ieeexplore.ieee.org/document/8104096)
+  
 ***
 
 ### Citing this Repo
