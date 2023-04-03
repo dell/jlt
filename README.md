@@ -1,6 +1,6 @@
 # jlt
 
-Johnson-Lindenstrauss transforms, random projections, and randomized Hadamard transforms in python 3.x
+Johnson-Lindenstrauss transform (JLT), random projection (RP), fast Johnson-Lindenstrauss transform (FJLT), and randomized Hadamard transform (RHT) in python 3.x
 
 Supports linear mappings and radial basis function (RBF) mappings (a.k.a. Random Fourier Features) that reduce dimensionality while preserving the square of the $\ell_2$-norm between points with bounded error.
 
@@ -127,7 +127,7 @@ The user can further edit the code to specify sampling with replacement (swr) or
   
 `k` S. Dasgupta and A. Gupta. "An elementary proof of the Johnson-Lindenstrauss Lemma." 1999. [link to paper](https://cseweb.ucsd.edu/~dasgupta/papers/jl.pdf)
   
-Recent work on tight lower bounds for `k` K. G. Larsen and J. Nelson. "Optimality of the Johnson-Lindenstrauss Lemma." 2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS). [link to paper](https://ieeexplore.ieee.org/document/8104096)
+Tight lower bounds for `k` K. G. Larsen and J. Nelson. "Optimality of the Johnson-Lindenstrauss Lemma." 2017 IEEE 58th Annual Symposium on Foundations of Computer Science (FOCS). [link to paper](https://ieeexplore.ieee.org/document/8104096)
   
 ***
 
