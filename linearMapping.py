@@ -251,7 +251,6 @@ def calculate_D_SRHT(d, k, random_seed):
     return sp.diags(D_diag, format='csr')
 
 
-
 def calculate_P(d, k, q, random_seed, swr):
     '''
     Helper function to calculates the P matrix of the FJLT. 
@@ -493,10 +492,6 @@ def linearMapping(A, k=None, eps=0.1, method='FJLT', p=2, random_seed=21):
             % method)
             
     return matrix_out
-
-
-
-########################################################################
 
 
 def _get_rffs(X, k, gamma, return_vars, random_seed):
