@@ -34,6 +34,8 @@ The figures below illustrate: 1) JLT algorithm runtimes; and 2) preservation of 
 
 JLT has applications in [linear mappings](https://en.wikipedia.org/wiki/Linear_map), [random projections](https://en.wikipedia.org/wiki/Random_projection), [locality-sensitive hashing LSH](https://en.wikipedia.org/wiki/Locality-sensitive_hashing), [matrix sketching](https://arxiv.org/abs/1206.0594), [low-rank matrix approximations](https://en.wikipedia.org/wiki/Low-rank_matrix_approximations), and [sparse recovery](https://www.cs.utexas.edu/~ecprice/courses/sublinear/bwca-sparse-recovery.pdf).
 
+For more info, check out the survey article, "[An Introduction to Johnson–Lindenstrauss Transforms](https://arxiv.org/abs/2103.00564)" (2021) by Casper Benjamin Freksen for a nice overview of JLT methods, their variations, and applications. 
+
 ***
 
 ## Dependencies and Installing
